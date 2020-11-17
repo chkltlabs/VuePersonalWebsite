@@ -10,13 +10,13 @@
     <!-- Vuetify CSS -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
-    <link href="{{ asset('public/css/app.css') }}">
+    <link href="{{ asset('erikgratz/public/css/app.css') }}">
 </head>
 <body>
 <div id="app">
     <app></app>
 </div>
 
-<script src="{{ asset('public/js/app.js') }}"></script>
+<script src="{{ asset('erikgratz/public/js/app.js') }}"></script>
 </body>
 </html>
