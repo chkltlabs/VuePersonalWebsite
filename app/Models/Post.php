@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'subtitle','body'];
+    protected $fillable = ['title', 'user_id', 'subtitle','body'];
+    protected $casts = [
+        'body' => 'array',
+    ];
 
 
 
 
     //Relationships
     public function user(){
-        return $this->hasOne('user', 'id', 'user_id');
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
     public function comments(){

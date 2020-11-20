@@ -1,5 +1,7 @@
 <template>
-    <p>Portfolio</p>
+    <div id="portfolio-view">
+        <p>Portfolio</p>
+    </div>
 </template>
 
 <script>

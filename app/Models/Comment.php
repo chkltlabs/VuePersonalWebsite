@@ -9,9 +9,16 @@ class Comment extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','commentable_type', 'commentable_id', 'body',];
+    protected $casts = [
+        'body' => 'array',
+    ];
 
     public function commentable(){
         return $this->morphTo();
+    }
+
+    public function user(){
+        return $this->hasOne('App\Models\User', 'id','user_id');
     }
 
     public function parentComment(){

@@ -17,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [
+    'uses' => '\App\Http\Controllers\Api\AuthController@login'
+]);
+
+Route::get('/refresh',[
+    'uses' => '\App\Http\Controllers\Api\AuthController@refresh'
+]);
+
+Route::get('/posts',[
+    'uses' => '\App\Http\Controllers\PostController@index'
+]);
+
+Route::get('/contact', function(){
+    return response()->json(config('frontend'));
+});

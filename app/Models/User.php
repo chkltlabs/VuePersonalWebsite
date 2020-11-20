@@ -6,8 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -41,11 +42,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Relationships
+
     public function comments(){
         return $this->hasMany('App\Models\Comment', 'user_id','id');
     }
 
     public function posts(){
         return $this->hasMany('App\Models\Posts', 'user_id', 'id');
+    }
+
+    //JWT Methods
+
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
     }
 }

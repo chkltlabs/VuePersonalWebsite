@@ -4,5 +4,14 @@
 // Variables
 @import 'variables';
 
+// Normalize
+@import 'vendor/normalize.css';
+
+// Base
+@import 'base/_base';
+
+// Components
+@import 'components/_components';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

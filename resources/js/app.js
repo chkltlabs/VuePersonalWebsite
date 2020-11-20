@@ -33,11 +33,18 @@ require('./bootstrap');
 
 //example code preserved above for learning
 
+//individual file includes
+require('./helpers')
+
+
 import Vue from 'vue'
 import VueRouter from "vue-router"
 import vuetify from './plugins/vuetify'
+import Vuex from 'vuex'
+import PostComponent from './components/PostComponent'
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
 import App from './views/App'
 import Home from './views/Home'
@@ -51,7 +58,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/home',
+            path: '/',
             name: 'home',
             component: Home
         },
@@ -79,10 +86,42 @@ const router = new VueRouter({
     ],
 });
 
+const store = new Vuex.Store({
+    state: {
+        posts: [],
+        contactInfo: [],
+    },
+    mutations: {
+        getPosts (state) {
+            axios.get('/api/posts').then((response) => {
+                state.posts = response.data.posts
+            }).catch(error => console.log(error))
+        },
+        getContactInfo (state) {
+            axios.get('/api/contact').then((response) => {
+                state.contactInfo = response.data.contactInfo;
+            }).catch(error => console.log(error))
+        }
+    },
+    getters: {
+        posts: state => {
+            return state.posts;
+        },
+        contactInfo: state => {
+            return state.contactInfo;
+        }
+    },
+})
+
 const app = new Vue({
     el: '#app',
     vuetify,
     components: {App:App},
     router,
+    store,
+    mounted: function() {
+        getJWT()
+    },
+    updated: () => refreshJWT(),
 });
 
