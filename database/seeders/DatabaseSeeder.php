@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\User::truncate();
          //\App\Models\User::factory(10)->create();
         \App\Models\User::create([
             'name' => 'Erik',
@@ -22,6 +23,8 @@ class DatabaseSeeder extends Seeder
                                  ]);
          $this->call([
              PostSeeder::class,
+             ProjectSeeder::class,
+             CommentSeeder::class,
                      ]);
     }
 }

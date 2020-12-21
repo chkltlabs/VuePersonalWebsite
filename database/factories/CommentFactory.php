@@ -16,7 +16,7 @@ class CommentFactory extends Factory
 
     protected $commentable_type_options = [
         'App\Models\Post',
-        'App\Models\Comment',
+        //'App\Models\Comment',
         'App\Models\User',
     ];
 
@@ -29,8 +29,8 @@ class CommentFactory extends Factory
     {
         $i = $this->faker->numberBetween(0, count($this->commentable_type_options)-1);
         $type = $this->commentable_type_options[$i];
-        $ids = $type::all((new $type())->getKeyName());
-        $id = $ids[$this->faker->numberBetween(0, count($ids)-1)];
+        $ids = array_column($type::all()->toArray(), (new $type())->getKeyName());
+        $id = $ids[$this->faker->numberBetween(1, count($ids))-1];
         return [
             'user_id' => $this->faker->numberBetween(1,4),
             'commentable_type' => $type,

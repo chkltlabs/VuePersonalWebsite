@@ -30,6 +30,10 @@ Route::get('/posts',[
     'uses' => '\App\Http\Controllers\PostController@index'
 ]);
 
+Route::get('/portfolio',[
+    'uses' => '\App\Http\Controllers\ProjectController@index'
+]);
+
 Route::get('/contact', function(){
     return response()->json(config('frontend'));
 });

@@ -90,6 +90,7 @@ const store = new Vuex.Store({
     state: {
         posts: [],
         contactInfo: [],
+        portfolio: [],
     },
     mutations: {
         getPosts (state) {
@@ -101,7 +102,13 @@ const store = new Vuex.Store({
             axios.get('/api/contact').then((response) => {
                 state.contactInfo = response.data.contactInfo;
             }).catch(error => console.log(error))
-        }
+        },
+        getPortfolio (state) {
+            axios.get('/api/portfolio').then((response) => {
+                console.log('portfolio route hit')
+                state.portfolio = response.data.portfolio
+            }).catch(error => console.log(error))
+        },
     },
     getters: {
         posts: state => {
@@ -109,7 +116,10 @@ const store = new Vuex.Store({
         },
         contactInfo: state => {
             return state.contactInfo;
-        }
+        },
+        portfolio: state => {
+            return state.portfolio
+        },
     },
 })
 

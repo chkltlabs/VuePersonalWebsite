@@ -1,20 +1,24 @@
 <template>
-    <div :id="'post-component-' + index">
+    <div :id="'portfolio-component-' + index">
         <li>
-            <h1>Title: {{ item.title }}</h1>
-            <h3>Subtitle: {{ item.subtitle }}</h3>
+            <a :href="item.link">
+                <h1>Title: {{item.title}}</h1>
+                <span :title="item.date_posted">
+            <h5>Posted: {{item.date_posted_human}}</h5>
+            </span>
+                <v-img :src="item.image"></v-img>
+            </a>
             <ParagraphComponent
-                v-for="(body, index) in item.body"
+                v-for="(body, index) in item.description"
                 :body="body"
                 :index="index"
                 :key="index"
             ></ParagraphComponent>
         </li>
-        <br>
     </div>
 </template>
-
 <script>
+
 import ParagraphComponent from "./ParagraphComponent";
 
 export default {
@@ -28,6 +32,8 @@ export default {
         }
     },
     mounted() {
+
     }
 }
+
 </script>

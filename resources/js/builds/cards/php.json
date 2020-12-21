@@ -1,0 +1,53 @@
+{
+
+  "q" : [
+    "What’s the difference between the <pre>include()</pre> and <pre>require()</pre> functions?",
+    "How can we get the IP address of the client?",
+    "What’s the difference between <pre>unset()</pre> and <pre>unlink()</pre>",
+    "What are the main error types in PHP and how do they differ?",
+    "What is the difference between GET and POST?",
+    "How can you enable error reporting in PHP?",
+    "What are Traits?",
+    "Can the value of a constant change during the script’s execution?",
+    "Can you extend a Final defined class?",
+    "What are the <pre>__construct()</pre> and <pre>__destruct()</pre> methods in a PHP class?",
+    "How we can get the number of elements in an array?",
+    "How would you declare a function that receives one parameter named hello?",
+    "The value of the variable input is a string \"1,2,3,4,5,6,7\". How would you get the sum of the integers contained inside input?",
+    "Suppose you receive a form submitted by a post to subscribe to a newsletter. This form has only one field, an input text field named email. How would you validate whether the field is empty? Print a message \"The email cannot be empty\" in this case.",
+    "What are the 3 scope levels available in PHP and how would you define them?",
+    "What are getters and setters and why are they important?",
+    "What does MVC stand for and what does each component do?",
+    "How does one prevent the following Warning ‘Warning: Cannot modify header information – headers already sent’ and why does it occur in the first place?",
+    "What are SQL Injections, how do you prevent them and what are the best practices?",
+    "Why would you use === instead of ==?",
+    "What are PSRs?"
+  ],
+  "a" : [
+    "They both include a specific file but on require the process exits with a fatal error if the file can’t be included, while include statement may still pass and jump to the next step in the execution.",
+    "<pre>$_SERVER[\"REMOTE_ADDR\"];</pre> is the easiest solution, but there are many options.",
+    "<pre>unset()</pre> sets a variable to “undefined” while <pre>unlink()</pre> deletes a file we pass to it from the file system.",
+    "In PHP there are three main type of errors: <br> <br> Notices – Simple, non-critical errors that are occurred during the script execution. An example of a Notice would be accessing an undefined variable.<br>Warnings – more important errors than Notices, however the scripts continue the execution. An example would be <pre>include()</pre> a file that does not exist.<br>Fatal – this type of error causes a termination of the script execution when it occurs. An example of a Fatal error would be accessing a property of a non-existent object or <pre>require()</pre> a non-existent file.<br><br>Understanding the error types is very important as they help developers understand what is going on during the development, and what to look out for during debugging.",
+    "GET displays the submitted data as part of the URL, during POST this information is not shown as it’s encoded in the request.<br>GET can handle a maximum of 2048 characters, POST has no such restrictions.<br>GET allows only ASCII data, POST has no restrictions, binary data are also allowed.<br>Normally GET is used to retrieve data while POST to insert and update.",
+    "Check if “display_errors” is equal “on” in the php.ini or declare “ini_set('display_errors', 1)” in your script.<br>Then, include “error_reporting(E_ALL)” in your code to display all types of error messages during the script execution.",
+    "Traits are a mechanism that allows you to create reusable code in languages like PHP where multiple inheritance is not supported. A Trait cannot be instantiated on its own. <a href='https://www.sitepoint.com/using-traits-in-php-5-4/'>Read More...</a>",
+    "No, the value of a constant cannot be changed once it’s declared during the PHP execution.",
+    "No, you cannot extend a Final defined class. A Final class or method declaration prevents child class or method overriding",
+    "All objects in PHP have Constructor and Destructor methods built-in. The Constructor method is called immediately after a new instance of the class is being created, and it’s used to initialize class properties. The Destructor method takes no parameters.",
+    "The <pre>count()</pre> function is used to return the number of elements in an array.",
+    "If hello is true, then the function must print hello, but if the function doesn’t receive hello or hello is false the function must print bye.<br><br><pre>function showMessage($hello=false){\n  echo ($hello)?'hello':'bye';\n}</pre>",
+    "echo array_sum(explode(',',$input)); <br> (The <pre>explode()</pre> function is one of the most used functions in PHP)",
+    "<pre>if(empty($_POST['email'])){\n  echo \"The email cannot be empty\";\n}</pre>",
+    "Private – Visible only in its own class<br>Public – Visible to any other code accessing the class<br>Protected – Visible only to classes parent(s) and classes that extend the current class",
+    "Getters and setters are methods used to declare or obtain the values of variables, usually private ones. They are important because it allows for a central location that is able to handle data prior to declaring it or returning it to the developer. Within a getter or setter one is able to consistently handle data that will eventually be passed into a variable or additional functions. An Example of this handling would be normalizing capitalization or rejecting invalid data formats",
+    "MVC stands for Model View Controller.<br><br>The controller handles data passed to it by the view and also passes data to the view. It’s responsible for interpretation of the data sent by the view and dispersing that data to the appropriate models awaiting results to pass back to the view. Very little, if any business logic should be occurring in the controller.<br><br>The model’s job is to handle specific tasks related to a specific area of the application or functionality. Models will communicate directly with your database or other storage system and will handle business logic related to the results.<br><br>The view is passed data by the controller and is displayed to the user.",
+    "The dev should not output anything to the browser before using code that modifies the HTTP headers. Once the developer calls echo or any other code that clears the buffer, the developer can no longer set cookies or headers. That is also true for error messages, so if an error happens before using the header command and the INI directive display_errors is set, then that will also cause that error to show.",
+    "SQL injections are a method to alter a query in a SQL statement send to the database server. That modified query then might leak information like username/password combinations and can help the intruder to further compromise the server.<br><br>To prevent SQL injections, one should always check & escape all user input. In PHP, this is easily forgotten due to the easy access to <pre>$_GET</pre> & <pre>$_POST</pre>, and is often forgotten by inexperienced developers. But there are also many other ways that users can manipulate variables used in a SQL query through cookies or even uploaded files (filenames). The only real protection is to use prepared statements everywhere consistently.<br><br>Do not use any of the mysql_* functions which have been deprecated since PHP 5.5 ,but rather use PDO, as it allows you to use other servers than MySQL out of the box.",
+    "If you would want to check for a certain type, like an integer or boolean, the === will do that exactly like one would expect from a strongly typed language, while == would convert the data temporarily and try to match both operand’s types. The identity operator (===) also performs better as a result of not having to deal with type conversion. Especially when checking variables for true/false, one should avoid using == as this would also take into account 0/1 or other similar representation.",
+    "PSRs are PHP Standards Recommendations that aim at standardising common aspects of PHP Development."
+
+
+
+
+  ]
+}

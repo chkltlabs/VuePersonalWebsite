@@ -1,0 +1,58 @@
+{
+
+  "q" : [
+    "Explain what is Javascript? List some data types supported by Javascript?",
+    "What does <pre>close()</pre> do in Javascript?",
+    "What is the difference between let and var?",
+    "Explain Closures in JavaScript?",
+    "Explain JavaScript Event Delegation Model?",
+    "What is the difference between let & const?",
+    "Explain Arrow functions?",
+    "What are exports and imports?",
+    "Explain “use strict” ?",
+    "In Javascript are calculations with fractional numbers guaranteed to be precise?",
+    "List the comparison operators supported by Javascript? (8 total)",
+    "List HTML DOM mouse events? (7 total)",
+    "How to get the last index of a string in Javascript?",
+    "How to get the primitive value of a string in Javascript?",
+    "What are the primitive data types in JavaScript?",
+    "What does the instanceof operator do?",
+    "What are different types of Popup boxes available in Javascript?",
+    "What is the difference between the <pre>substr()</pre> and <pre>substring()</pre> functions in JavaScript?",
+    "What is output of undefined * 2 in Javascript?",
+    "How to add/remove properties to object dynamically in Javascript?",
+    "How to clone an object in Javascript?"
+
+
+
+
+
+  ],
+  "a" : [
+    "Javascript is an object-oriented computer programming language commonly used to create interactive effects within web browsers.It is first used by the Netscape browser, that provides access to the HTML document object model (DOM), provides access to the browser object model (BOM). Javascript syntax looks a lot like java, c or c++ syntax.<br><br>Below is the list of data types supported by Javascript:-<br><br>Undefined<br>Null<br>Boolean<br>String<br>Symbol<br>Number<br>Object",
+    "In Javascript <pre>close()</pre> method is used to close the current window. You must write <pre>window.close()</pre> to ensure that this command is associated with a window object and not some other JavaScript object.",
+    "Both var and let are used for variable/ method declaration in javascript but the main difference between let and var is that var is function scoped whereas let is block scoped.",
+    "Closures are the combination of lexical environment and function within which the function was declared. This allows JavaScript programmers to write better, more creative, concise and expressive codes. The closure will consist of all the local variables that were in-scope when the closure was created.",
+    "When capturing and bubbling, Event Delegation allows functions to implement one single handler to many elements at once. Event delegation allows you to add event listeners to one parent instead of specified nodes. That particular listener analyzes bubbled events to find a match on the child elements.",
+    "const: Used to create an immutable variable. Immutable variables are variables whose value is never changed in the complete life cycle of the program.<br>let: Used to create a mutable variable. Mutable variables are normal variables like var that can be changed any number of times.",
+    "An arrow function is a concise and short way to write function expressions in Es6 or above. Arrow functions cannot be used as constructors and also does not supports this, arguments, super, or new.target keywords. It is best suited for non-method functions. In general an arrow function looks like <pre>const function_name = () => {}<pre>",
+    "Imports and exports help us to write modular javascript code. Using Imports and exports we can split our code into multiple files. Imports allow taking only some specific variables or methods of a file. We can import methods or variables that are exported by a module. See the below example for more detail. <a href='https://medium.com/@trekinbami/a-not-so-in-depth-explanation-of-es6-modules-import-and-export-13a80300f2f0'>Read More...</a>",
+    "“use strict” is a javascript directive that is introduced in Es5. The purpose of using “use strict” directive is to enforce the code is executed in strict mode. In strict mode we can’t use a variable without declaring it. “use strict” is ignored by earlier versions of Javascript.",
+    "NO, calculations with fractional numbers are not guaranteed to be precise in Javascript",
+    "Javascript supports below comparison operators<br><br> > Greater than<br>< Less than<br><= Less than or equal to<br>>= Greater than or equal to<br>== Equal to<br>!= Not Equal to<br>=== Equal to with datatype check<br>!== Not equal to with datatype check",
+    "HTML DOM mouse events<br><br>onclick<br>ondblclick<br>mousemove<br>mousedown<br>mouseover<br>mouseout<br>mouseup",
+    "string.length-1 is used to get the last index of a string in Javascript",
+    "In Javascript <pre>valueOf()</pre> method is used to get the primitive value of a string.",
+    "A primitive is a basic data type that’s not built out of other data types. It can only represent one single value. All primitives are built-in data types by necessity, (the compiler has to know about them,) but not all built-in data types are primitives.<br><br>In JavaScript there are 5 primitive data types are available they are <b>undefined, null, boolean, string</b> and <b>number</b> are available.Everything else in Javascript is an object.",
+    "In Javascript, the instanceof operator checks whether the object is an instance of a class or not.",
+    "In Javascript there are 3 types of Popup Boxes are available, they are<br><br>Alert<br>Confirm<br>Prompt",
+    "The <pre>substr()</pre> function has the form substr(startIndex,length). It returns the substring from startIndex and returns ‘length’ number of characters.<pre>var s = \"hello\";\n( s.substr(1,4) == \"ello\" ) // true\n</pre><br><br>The <pre>substring()</pre> function has the form substring(startIndex,endIndex). It returns the substring from startIndex up to endIndex – 1.<pre>var s = \"hello\";\n( s.substring(1,4) == \"ell\" ) // true</pre>",
+    "nan is the output of undefined * 2.",
+    "You can add a property to an object using object.property_name =value, delete object.property_name is used to delete a property.<pre>let user = new Object();\n    // adding a property\n    user.name='Anil';\n    user.age  =25;\n    console.log(user);\n    delete user.age;\n    console.log(user);\n</pre>",
+    "The <pre>Object.assign()</pre> method is used for cloning an object in Javascript. It accepts an empty set of curly braces and the variable containing the object to be cloned as arguments"
+
+
+
+
+  ]
+}
