@@ -22,8 +22,8 @@ class Comment extends Model
     }
 
     public function parentComment(){
-        return $this->attributes['commentable_type'] == 'App\Models\Comment'
-            ? $this->morphMany('App\Models\Comment', 'commentable')
+        return $this->attributes['commentable_type'] == Comment::class
+            ? $this->morphMany(Comment::class, 'commentable')
             : null ;
     }
 }

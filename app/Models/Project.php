@@ -18,4 +18,9 @@ class Project extends Model
     public function getDatePostedHumanAttribute(){
         return Carbon::parse($this->date_posted)->diffForHumans();
     }
+
+
+    public function comments(){
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

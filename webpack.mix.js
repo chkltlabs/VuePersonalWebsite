@@ -1,6 +1,11 @@
 const mix = require('laravel-mix');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+require('vuetifyjs-mix-extension')
 
 mix.webpackConfig({
+    plugins: [
+        new VuetifyLoaderPlugin()
+    ],
     resolve: {
         extensions: ['.js','.vue'],
         alias: {
@@ -22,5 +27,6 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js').vuetify()
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps();

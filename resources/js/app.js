@@ -39,12 +39,13 @@ require('./helpers')
 
 import Vue from 'vue'
 import VueRouter from "vue-router"
-import vuetify from './plugins/vuetify'
+import Vuetify from "vuetify/lib";
 import Vuex from 'vuex'
 import PostComponent from './components/PostComponent'
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(Vuetify)
 
 import App from './views/App'
 import Home from './views/Home'
@@ -93,17 +94,17 @@ const store = new Vuex.Store({
         portfolio: [],
     },
     mutations: {
-        getPosts (state) {
+        getPosts(state) {
             axios.get('/api/posts').then((response) => {
                 state.posts = response.data.posts
             }).catch(error => console.log(error))
         },
-        getContactInfo (state) {
+        getContactInfo(state) {
             axios.get('/api/contact').then((response) => {
                 state.contactInfo = response.data.contactInfo;
             }).catch(error => console.log(error))
         },
-        getPortfolio (state) {
+        getPortfolio(state) {
             axios.get('/api/portfolio').then((response) => {
                 console.log('portfolio route hit')
                 state.portfolio = response.data.portfolio
@@ -125,11 +126,20 @@ const store = new Vuex.Store({
 
 const app = new Vue({
     el: '#app',
-    vuetify,
-    components: {App:App},
+    vuetify: new Vuetify({
+        theme: {
+            dark: true,
+            themes: {
+                dark: {
+                    primary: '#673ab7',
+                },
+            },
+        },
+    }),
+    components: {App: App},
     router,
     store,
-    mounted: function() {
+    mounted: function () {
         getJWT()
     },
     updated: () => refreshJWT(),
