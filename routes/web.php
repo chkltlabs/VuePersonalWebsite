@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/password/confirm', 'App\Http\Controllers\ConfirmPasswordController@confirm');
+
 Route::get('/{any}', 'App\Http\Controllers\VueController@index')->where('any', '.*');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

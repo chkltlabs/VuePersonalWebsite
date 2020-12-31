@@ -37,91 +37,81 @@ require('./bootstrap');
 require('./helpers')
 
 
-import Vue from 'vue'
-import VueRouter from "vue-router"
+import Vue from 'vue';
+import VueRouter from "vue-router";
 import Vuetify from "vuetify/lib";
-import Vuex from 'vuex'
-import PostComponent from './components/PostComponent'
+import Vuex from 'vuex';
+import store from './store';
+import Axios from 'axios'
+
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('token')
+if (token) {
+    Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
-Vue.use(Vuetify)
+Vue.use(Vuetify);
 
-import App from './views/App'
-import Home from './views/Home'
-import About from './views/About'
-import Portfolio from './views/Portfolio'
-import Blog from './views/Blog'
-import Contact from './views/Contact'
-
+import {routes} from './routes';
 
 const router = new VueRouter({
     mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About
-        },
-        {
-            path: '/portfolio',
-            name: 'portfolio',
-            component: Portfolio
-        },
-        {
-            path: '/blog',
-            name: 'blog',
-            component: Blog
-        },
-        {
-            path: '/contact',
-            name: 'contact',
-            component: Contact
-        },
+    routes,
+})
 
-    ],
-});
+import App from './views/App'
 
-const store = new Vuex.Store({
-    state: {
-        posts: [],
-        contactInfo: [],
-        portfolio: [],
-    },
-    mutations: {
-        getPosts(state) {
-            axios.get('/api/posts').then((response) => {
-                state.posts = response.data.posts
-            }).catch(error => console.log(error))
-        },
-        getContactInfo(state) {
-            axios.get('/api/contact').then((response) => {
-                state.contactInfo = response.data.contactInfo;
-            }).catch(error => console.log(error))
-        },
-        getPortfolio(state) {
-            axios.get('/api/portfolio').then((response) => {
-                console.log('portfolio route hit')
-                state.portfolio = response.data.portfolio
-            }).catch(error => console.log(error))
-        },
-    },
-    getters: {
-        posts: state => {
-            return state.posts;
-        },
-        contactInfo: state => {
-            return state.contactInfo;
-        },
-        portfolio: state => {
-            return state.portfolio
-        },
-    },
+// const store = new Vuex.Store({
+//     state: {
+//         posts: [],
+//         contactInfo: [],
+//         portfolio: [],
+//         fadeThreshold: .75,
+//     },
+//     mutations: {
+//         getPosts(state) {
+//             axios.get('/api/posts').then((response) => {
+//                 state.posts = response.data.posts
+//             }).catch(error => console.log(error))
+//         },
+//         getContactInfo(state) {
+//             axios.get('/api/contact').then((response) => {
+//                 state.contactInfo = response.data.contactInfo;
+//             }).catch(error => console.log(error))
+//         },
+//         getPortfolio(state) {
+//             axios.get('/api/portfolio').then((response) => {
+//                 console.log('portfolio route hit')
+//                 state.portfolio = response.data.portfolio
+//             }).catch(error => console.log(error))
+//         },
+//     },
+//     getters: {
+//         posts: state => {
+//             return state.posts;
+//         },
+//         contactInfo: state => {
+//             return state.contactInfo;
+//         },
+//         portfolio: state => {
+//             return state.portfolio
+//         },
+//     },
+// })
+
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.isLoggedIn) {
+            next()
+            return
+        }
+        next('/login')
+    } else {
+        next()
+    }
 })
 
 const app = new Vue({
@@ -140,8 +130,8 @@ const app = new Vue({
     router,
     store,
     mounted: function () {
-        getJWT()
+        //getJWT()
     },
-    updated: () => refreshJWT(),
+    //updated: () => refreshJWT(),
 });
 

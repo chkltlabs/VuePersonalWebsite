@@ -28,7 +28,10 @@
     "dependencies": {
         "bourbon": "^7.0.0",
         "node": "^15.2.1",
+        "quill": "^1.3.7",
+        "vee-validate": "^3.4.5",
         "vue-router": "^3.4.9",
+        "vue2-editor": "^2.10.2",
         "vuetify": "^2.3.21",
         "vuetifyjs-mix-extension": "0.0.17",
         "vuex": "^3.5.1"

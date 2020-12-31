@@ -1,24 +1,35 @@
 <template>
-    <div :id="'post-component-' + index">
-        <li>
-            <h1>Title: {{ item.title }}</h1>
-            <h3>Subtitle: {{ item.subtitle }}</h3>
-            <ParagraphComponent
-                v-for="(body, index) in item.body"
-                :body="body"
-                :index="index"
-                :key="index"
-            ></ParagraphComponent>
-        </li>
-        <br>
-    </div>
+    <v-lazy
+        :options="{
+          threshold: $store.state.fadeThreshold
+        }"
+        min-height="200"
+        transition="fade-transition">
+        <div :id="'post-component-' + index">
+            <li>
+                <div v-if="isEditing">
+                    <editor
+                        :item="item"
+                    ></editor>
+                </div>
+                <div v-else>
+                    <v-btn small @click="function (){isEditing = true}"></v-btn>
+                    <h1>Title: {{ item.title }}</h1>
+                    <h3>Subtitle: {{ item.subtitle }}</h3>
+                    <div v-html="item.body"/>
+                </div>
+            </li>
+            <br>
+        </div>
+    </v-lazy>
 </template>
 
 <script>
 import ParagraphComponent from "./ParagraphComponent";
+import Editor from "./Editor";
 
 export default {
-    components: {ParagraphComponent},
+    components: {Editor, ParagraphComponent},
     props: {
         item: {
             type: Object
@@ -27,7 +38,11 @@ export default {
             type: Number
         }
     },
-    mounted() {
-    }
+    data() {
+        return {
+            isEditing: false
+        }
+    },
+    methods: {}
 }
 </script>

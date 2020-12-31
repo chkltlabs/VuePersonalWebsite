@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(),
             'user_id' => $this->faker->numberBetween(1, 4),
             'subtitle' => $this->faker->sentence(),
-            'body' => [$this->faker->bs,$this->faker->bs,$this->faker->bs,$this->faker->bs,],
+            'body' => "<p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p>",
             'created_at' => now(),
         ];
     }
