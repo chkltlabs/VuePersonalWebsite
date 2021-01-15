@@ -1,15 +1,22 @@
 const mix = require('laravel-mix');
+const webpack = require('webpack');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 require('vuetifyjs-mix-extension')
 
-mix.webpackConfig({
-    plugins: [
-        new VuetifyLoaderPlugin()
-    ],
-    resolve: {
-        extensions: ['.js','.vue'],
-        alias: {
-            '@':__dirname + '/resources'
+mix.webpackConfig(webpack => {
+    return {
+        plugins: [
+            new VuetifyLoaderPlugin(),
+            new webpack.ProvidePlugin({
+                'window.Quill': 'quill',
+                'Quill': 'quill'
+            })
+        ],
+        resolve: {
+            extensions: ['.js', '.vue'],
+            alias: {
+                '@': __dirname + '/resources'
+            }
         }
     }
 });

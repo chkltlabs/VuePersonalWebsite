@@ -10,6 +10,7 @@
                 <div v-if="isEditing">
                     <editor
                         :item="item"
+                        :location="'blog'"
                     ></editor>
                 </div>
                 <div v-else>

@@ -37,3 +37,11 @@ Route::get('/portfolio',[
 Route::get('/contact', function(){
     return response()->json(config('frontend'));
 });
+
+Route::post('/images/new', [
+    'uses' => '\App\Http\Controllers\ImageController@new'
+]);
+
+Route::post('/images/check',[
+    'uses' => '\App\Http\Controllers\ImageController@check'
+]);

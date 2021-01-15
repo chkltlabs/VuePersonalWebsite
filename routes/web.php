@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/password/confirm', 'App\Http\Controllers\ConfirmPasswordController@confirm');
+Route::post('/password/confirm', 'App\Http\Controllers\Auth\ConfirmPasswordController@confirm');
 
 Route::get('/{any}', 'App\Http\Controllers\VueController@index')->where('any', '.*');
 
