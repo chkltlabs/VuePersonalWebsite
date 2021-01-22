@@ -3,8 +3,13 @@
         <v-text-field v-model="title" label="title" required></v-text-field>
         <v-text-field v-model="subtitle" label="subtitle" required ></v-text-field>
         <vue-editor id="editor" v-model="content" :editorOptions="quillModules" useCustomImageHandler @image-added="handleImageAdded"></vue-editor>
+        <v-container>
         <v-btn @click="saveContent">Save</v-btn>
-        <div v-html="content"></div>
+        <v-btn v-if="this.item.id" @click="performDelete">Delete</v-btn>
+        </v-container>
+        <v-container>
+            <div v-html="content"></div>
+        </v-container>
     </v-form>
 </template>
 <script>
@@ -48,13 +53,50 @@ export default {
         }
     },
     methods: {
+        performDelete: function(){
+            console.log(this.item.id);
+            var id = this.item.id;
+
+            axios({
+                url: `/api/post/${id}/delete`,
+                method: "DELETE",
+            })
+                .then(result => {
+                    console.log(result)
+                    this.$emit('deletedItem', id)
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
         saveContent: function() {
-            console.log(this.content);
+
+            var formData = new FormData();
+            formData.append('title', this.title);
+            formData.append('subtitle', this.subtitle);
+            formData.append('body', this.content)
+            formData.append('id', this.item.id)
+            formData.append('item', this.item)
+            console.log(formData)
+
+            axios({
+                url: `/api/post/${this.item.id}/update`,
+                method: "POST",
+                data: formData
+            })
+                .then(result => {
+                    console.log(result)
+                    this.$emit('newItem', result.data.item)
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
             // An example of using FormData
             // NOTE: Your key could be different such as:
             // formData.append('file', file)
+            //todo, change this silliness to a hashed 'name'
             var addName = prompt("Name that image for me, homeslice", 'Padunkle')
             var formData = new FormData();
             formData.append("image", file);

@@ -34,6 +34,14 @@ Route::get('/post/{id}',[
     'uses' => '\App\Http\Controllers\PostController@view'
 ]);
 
+Route::post('/post/{id}/update',[
+    'uses' => '\App\Http\Controllers\PostController@update'
+]);
+
+Route::delete('/post/{id}/delete',[
+    'uses' => '\App\Http\Controllers\PostController@delete'
+]);
+
 Route::get('/portfolio',[
     'uses' => '\App\Http\Controllers\ProjectController@index'
 ]);
