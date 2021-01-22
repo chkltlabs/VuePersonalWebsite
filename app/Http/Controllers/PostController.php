@@ -12,4 +12,17 @@ class PostController extends Controller
         $posts = Post::all();
         return response()->json(['posts' => $posts]);
     }
+
+    public function view(Request $request, $id){
+        $post = Post::find($id);
+        return response()->json(['post' => $post]);
+    }
+
+    public function add(Request $request){
+
+    }
+
+    public function update(Request $request, $id){
+
+    }
 }

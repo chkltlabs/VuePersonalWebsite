@@ -14,7 +14,10 @@
                     ></editor>
                 </div>
                 <div v-else>
-                    <v-btn small @click="function (){isEditing = true}"></v-btn>
+                    <div v-if="isMasterUser">
+                        <!--                         todo: name and icon for this button -->
+                        <v-btn small @click="function (){isEditing = true}"></v-btn>
+                    </div>
                     <h1>Title: {{ item.title }}</h1>
                     <h3>Subtitle: {{ item.subtitle }}</h3>
                     <div v-html="item.body"/>
@@ -28,6 +31,7 @@
 <script>
 import ParagraphComponent from "./ParagraphComponent";
 import Editor from "./Editor";
+import store from "../store";
 
 export default {
     components: {Editor, ParagraphComponent},
@@ -41,7 +45,8 @@ export default {
     },
     data() {
         return {
-            isEditing: false
+            isEditing: false,
+            isMasterUser: this.$store.state.loginStatus === 'master',
         }
     },
     methods: {}

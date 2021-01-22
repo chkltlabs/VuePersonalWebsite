@@ -30,6 +30,10 @@ Route::get('/posts',[
     'uses' => '\App\Http\Controllers\PostController@index'
 ]);
 
+Route::get('/post/{id}',[
+    'uses' => '\App\Http\Controllers\PostController@view'
+]);
+
 Route::get('/portfolio',[
     'uses' => '\App\Http\Controllers\ProjectController@index'
 ]);

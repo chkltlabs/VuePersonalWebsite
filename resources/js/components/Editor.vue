@@ -42,12 +42,6 @@ export default {
                 modules: {
                     imageDrop: true,
                     imageResize: {
-                        // handleStyles: {
-                        //     backgroundColor: 'black',
-                        //     border: 'none',
-                        //     color: 'white',
-                        // },
-                        // modules: ['Resize', 'DisplaySize', 'Toolbar'],
                     }
                 },
             }
