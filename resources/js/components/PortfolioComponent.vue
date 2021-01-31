@@ -6,21 +6,24 @@
         min-height="200"
         transition="fade-transition">
         <div :id="'portfolio-component-' + index">
-            <li>
-                <a :href="item.link">
-                    <h1>Title: {{ item.title }}</h1>
-                    <span :title="item.date_posted">
-            <h5>Posted: {{ item.date_posted_human }}</h5>
-            </span>
-                    <v-img :src="item.image"></v-img>
-                </a>
-                <ParagraphComponent
-                    v-for="(body, index) in item.description"
-                    :body="body"
-                    :index="index"
-                    :key="index"
-                ></ParagraphComponent>
-            </li>
+            <v-card>
+                <v-list-item three-line>
+                    <v-list-item-content>
+                        <v-list-item-title>Title: {{ item.title }}</v-list-item-title>
+                        <v-list-item-subtitle>Posted: {{ item.date_posted_human }}</v-list-item-subtitle>
+                        <v-list-item
+                            style="color: white"
+                            v-for="(body, index) in item.description"
+                            :key="index"
+                        >{{ body }}
+                        </v-list-item>
+                    </v-list-item-content>
+                    <v-list-item-avatar tile size="200" color="grey">
+                        <v-img :src="item.image" rounded="50"></v-img>
+                    </v-list-item-avatar>
+                </v-list-item>
+            </v-card>
+            <br>
         </div>
     </v-lazy>
 </template>
@@ -39,7 +42,7 @@ export default {
         }
     },
     mounted() {
-
+        console.log(this.item)
     }
 }
 

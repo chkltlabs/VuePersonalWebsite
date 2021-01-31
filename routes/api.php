@@ -57,3 +57,11 @@ Route::post('/images/new', [
 Route::post('/images/check',[
     'uses' => '\App\Http\Controllers\ImageController@check'
 ]);
+
+Route::get('/unlock/{tag}', [
+    'uses' => '\App\Http\Controllers\TagsController@unlock'
+]);
+
+Route::get('/allTags/', [
+    'uses' => '\App\Http\Controllers\TagsController@all'
+]);

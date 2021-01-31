@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Image;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +24,6 @@ class ProjectFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
-            'image' => $this->faker->image(),
             'date_posted' => $this->faker->date(),
             'link' => $this->faker->url,
             'description' => [$this->faker->bs,$this->faker->bs,$this->faker->bs,$this->faker->bs,]

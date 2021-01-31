@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'subtitle' => $this->faker->sentence(),
             'body' => "<p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p><br><p>{$this->faker->bs}</p>",
             'created_at' => now(),
+            'tags' => [$this->faker->word,$this->faker->word,$this->faker->word,$this->faker->word,$this->faker->word,]
         ];
     }
 }

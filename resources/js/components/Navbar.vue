@@ -2,11 +2,15 @@
 <!--    <v-app-bar app bottom dense dark-->
 <!--               class="text&#45;&#45;lighten-2">-->
     <v-bottom-navigation app dense dark shift color="primary" class="text--lighten-1">
-        <v-toolbar-title class="px-2 py-3 d-none d-sm-flex font-weight-bold" :to="{ name: login}">
+        <v-toolbar-title class="px-2 py-3 d-none d-sm-flex font-weight-bold" >
             <span>Erik</span>
             <span class="font-weight-light">V</span>
             <span>Gratz</span>
         </v-toolbar-title>
+        <v-btn
+            text small
+            :to="{ name: 'login'}">
+        </v-btn>
         <v-spacer class="d-none d-sm-flex"></v-spacer>
         <v-toolbar-items
             color="primary">
@@ -70,7 +74,7 @@ export default {
         logout: function () {
             this.$store.dispatch('logout')
                 .then(() => {
-                    this.$router.push('/login')
+                    this.$router.push('/home')
                 })
         },
         created: function () {

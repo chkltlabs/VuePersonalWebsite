@@ -4,7 +4,7 @@
         <ul>
             <v-card v-if="isMasterUser">
                 <v-card-actions>
-                    <v-btn small @click="editNewPost = !editNewPost">
+                    <v-btn small @click="editToggle">
                         <span v-if="!editNewPost">New Post</span>
                         <span v-else>Cancel</span>
                     </v-btn>
@@ -16,8 +16,13 @@
                             style="height: 100%;">
                             <v-container>
                                 <editor
-                                    :item="{title: '', subtitle: '', body: ''}"
+                                    :item="{
+                                    title:  this.$store.getters.newPostTitle,
+                                    subtitle:  this.$store.getters.newPostSubtitle,
+                                    body:  this.$store.getters.newPostBody,
+                                }"
                                     :location="'blog'"
+                                    :new-post="true"
                                 ></editor>
                             </v-container>
                         </v-card>
@@ -25,12 +30,13 @@
                 </v-expand-transition>
             </v-card>
             <br>
-            <PostComponent v-for="(item, index) in posts"
-                           :item="item"
-                           :index="index"
-                           :key="item.id"
-                           @deletedItem="deletedItem"
-            ></PostComponent>
+                <PostComponent v-for="(item, index) in posts"
+                               :item="item"
+                               :index="index"
+                               :key="item.id"
+                               :item-data="item"
+                               v-on:deletedItem="deletedItem(index)"
+                ></PostComponent>
         </ul>
     </div>
 </template>
@@ -45,29 +51,29 @@ export default {
     data() {
         return {
             editNewPost: false,
-            isMasterUser: this.$store.state.loginStatus === 'master'
+            isMasterUser: this.$store.state.loginStatus === 'master',
+            isLoggedIn: this.$store.getters.isLoggedIn,
         }
     },
     computed: {
         posts: function () {
+
+            return this.$store.state.posts.filter((post) => {
+                return post.tags.filter(value => this.$store.state.allowedTags.includes(value)).length > 0
+            })
+
             return this.$store.state.posts
-        },
-        isMasterUser: function () {
-            return false;
-            return this.$store.getters.authStatus === 'master'
-        },
-        isLoggedIn: function () {
-            return this.$store.getters.isLoggedIn
         },
     },
     mounted() {
         this.$store.commit('getPosts')
     },
     methods: {
-        deletedItem(id){
-            console.log(this.posts)
+        deletedItem(id) {
             this.posts.splice(id, 1)
-            this.$forceUpdate();
+        },
+        editToggle() {
+            this.editNewPost = !this.editNewPost
         }
     }
 }

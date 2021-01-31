@@ -1,13 +1,11 @@
 <template>
     <div id="portfolio-view">
         <p>Portfolio</p>
-        <ul>
             <PortfolioComponent v-for="(item, index) in portfolio"
                                 :item="item"
                                 :index="index"
                                 :key="item.id"
             ></PortfolioComponent>
-        </ul>
     </div>
 </template>
 

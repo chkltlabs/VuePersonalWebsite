@@ -44,4 +44,8 @@ class PostControllerTest extends TestCase {
                     ->decodeResponseJson();
         $res->assertFragment(['id' => $id]);
     }
+
+    public function testUpdateSuccess() {
+
+    }
 }

@@ -12,6 +12,12 @@
                         class="transition-fast-in-fast-out v-card--showMe"
                         style="height: 100%;"
                     >
+                        <v-card-actions>
+                            <v-btn small @click="isEditing = false">
+                                <span>Cancel</span>
+                                <v-icon>mdi-pencil-outline</v-icon>
+                            </v-btn>
+                        </v-card-actions>
                         <v-container>
                             <editor
                                 class="transition-fast-in-fast-out v-card--showMe"
@@ -23,6 +29,7 @@
                         </v-container>
                     </v-card>
                 </div>
+                <br>
             </v-expand-transition>
             <div v-if="!isEditing">
                 <v-card>
@@ -55,8 +62,8 @@
                     </v-card-actions>
                 </v-card>
             </div>
+            <br>
         </div>
-        <br>
     </v-lazy>
 </template>
 

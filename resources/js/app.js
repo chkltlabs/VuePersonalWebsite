@@ -63,45 +63,6 @@ const router = new VueRouter({
 
 import App from './views/App'
 
-// const store = new Vuex.Store({
-//     state: {
-//         posts: [],
-//         contactInfo: [],
-//         portfolio: [],
-//         fadeThreshold: .75,
-//     },
-//     mutations: {
-//         getPosts(state) {
-//             axios.get('/api/posts').then((response) => {
-//                 state.posts = response.data.posts
-//             }).catch(error => console.log(error))
-//         },
-//         getContactInfo(state) {
-//             axios.get('/api/contact').then((response) => {
-//                 state.contactInfo = response.data.contactInfo;
-//             }).catch(error => console.log(error))
-//         },
-//         getPortfolio(state) {
-//             axios.get('/api/portfolio').then((response) => {
-//                 console.log('portfolio route hit')
-//                 state.portfolio = response.data.portfolio
-//             }).catch(error => console.log(error))
-//         },
-//     },
-//     getters: {
-//         posts: state => {
-//             return state.posts;
-//         },
-//         contactInfo: state => {
-//             return state.contactInfo;
-//         },
-//         portfolio: state => {
-//             return state.portfolio
-//         },
-//     },
-// })
-
-
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
         if (store.getters.isLoggedIn) {
@@ -113,6 +74,28 @@ router.beforeEach((to, from, next) => {
         next()
     }
 })
+
+window.unlock = function(tag){
+    axios
+        .get(`/api/unlock/${tag}`)
+        .then((response) => {
+            console.log(response)
+            if(response.data.allow === true){
+                if(typeof response.data.relatedTags == 'object' && response.data.relatedTags.length > 0){
+                    response.data.relatedTags.forEach(function(item, index) {
+                        store.commit('allowTag', item);
+                    })
+                }else{
+                    store.commit('allowTag', tag)
+                }
+            }else if(response.data.question){
+                let answer = prompt(response.data.question.text);
+                if(-1 !== response.data.question.acceptedAnswers.indexOf(answer.toLowerCase())){
+                    store.commit('allowTag', tag)
+                }
+            }
+        }).catch(error => (console.log(error)))
+}
 
 const app = new Vue({
     el: '#app',

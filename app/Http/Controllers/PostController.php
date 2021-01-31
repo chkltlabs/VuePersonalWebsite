@@ -8,12 +8,12 @@ use App\Http\Controllers\MyController as Controller;
 
 class PostController extends Controller {
     public function index(Request $request) {
-        $posts = Post::all();
+        $posts = Post::with('comments')->get();
         return response()->json(['posts' => $posts]);
     }
 
     public function view(Request $request, $id) {
-        $post = Post::find($id);
+        $post = Post::with('comments')->find($id);
         return response()->json(['post' => $post]);
     }
 
@@ -22,7 +22,8 @@ class PostController extends Controller {
         $attrs = [
             'title'     => $data['title'],
             'subititle' => $data['subtitle'],
-            'body'      => $data['body']
+            'body'      => $data['body'],
+            'tags'      => $data['tags'],
         ];
         $new   = Post::create($attrs);
         $new->save();
@@ -32,14 +33,15 @@ class PostController extends Controller {
     public function update(Request $request, $id) {
         $original           = Post::find($id);
         $data               = $request->all();
-        $original->title    = $data['title'];
-        $original->subtitle = $data['subtitle'];
-        $original->body     = $data['body'];
+        if(isset($data['tags'])){
+            $data['tags'] = (array) json_decode($data['tags']);
+        }
+        $original->update($data);
         $original->save();
         return response()->json(['item' => $original->toArray()]);
     }
 
-    public function delete(Request  $request, $id){
+    public function delete(Request $request, $id) {
         $post = Post::find($id);
         $post->delete();
     }

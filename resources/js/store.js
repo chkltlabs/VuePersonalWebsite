@@ -8,11 +8,14 @@ export default new Vuex.Store({
     state: {
         loginStatus: localStorage.getItem('loginStatus') || '',
         token: localStorage.getItem('token') || '',
+        lowCalStorage: localStorage,
         user : {},
         posts: [],
         contactInfo: [],
         portfolio: [],
         fadeThreshold: .75,
+        allowedTags: ['et'],
+        allTags: [],
     },
     mutations: {
         auth_request(state){
@@ -52,6 +55,32 @@ export default new Vuex.Store({
             axios.get('/api/portfolio').then((response) => {
                 state.portfolio = response.data.portfolio
             }).catch(error => console.log(error))
+        },
+        getAllTags(state) {
+            axios.get('/api/allTags').then((response) => {
+                state.allTags = response.data
+            }).catch(error => console.log(error))
+        },
+        setNewPostItem(state, item) {
+            localStorage.setItem('new_post_item', item);
+        },
+        setNewPostTitle(state, title) {
+            let item = localStorage.getItem('new_post_item');
+            item.title = title;
+            localStorage.setItem('new_post_item', item)
+        },
+        setNewPostSubtitle(state, subtitle) {
+            let item = localStorage.getItem('new_post_item');
+            item.subtitle = subtitle;
+            localStorage.setItem('new_post_item', item);
+        },
+        setNewPostBody(state, body) {
+            let item = localStorage.getItem('new_post_item');
+            item.body = body;
+            localStorage.setItem('new_post_item', item);
+        },
+        allowTag(state, tag) {
+            state.allowedTags.push(tag);
         },
     },
     actions: {
@@ -116,6 +145,26 @@ export default new Vuex.Store({
         },
         portfolio: state => {
             return state.portfolio
+        },
+        newPostItem: state => {
+            return state.lowCalStorage.getItem('new_post_item')
+                ? state.lowCalStorage.getItem('new_post_item')
+                : {} ;
+        },
+        newPostTitle: state => {
+            return state.lowCalStorage.getItem('new_post_item')
+                ? state.lowCalStorage.getItem('new_post_item').title
+                : '' ;
+        },
+        newPostSubtitle: state => {
+            return state.lowCalStorage.getItem('new_post_item')
+                ? state.lowCalStorage.getItem('new_post_item').subtitle
+                : '' ;
+        },
+        newPostBody: state => {
+            return state.lowCalStorage.getItem('new_post_item')
+                ? state.lowCalStorage.getItem('new_post_item').body
+                : '' ;
         },
     }
 })

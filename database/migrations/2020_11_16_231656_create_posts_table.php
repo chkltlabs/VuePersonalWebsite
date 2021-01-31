@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->longText('body');
+            $table->json('tags');
         });
     }
 

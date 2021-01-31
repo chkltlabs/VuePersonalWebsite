@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'user_id', 'subtitle','body'];
+    protected $fillable = ['title', 'user_id', 'subtitle','body', 'tags'];
+    protected $casts = ['tags' => 'array'];
 
 
-
+    public function scopeTagged($query, $tag) {
+        return $query->where('tags', 'LIKE', $tag);
+    }
 
     //Relationships
     public function user(){
@@ -20,6 +23,10 @@ class Post extends Model
 
     public function comments(){
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function images(){
+        return $this->morphToMany(Image::class, 'imageable');
     }
 
 }
