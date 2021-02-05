@@ -36,7 +36,7 @@ require('./bootstrap');
 //individual file includes
 require('./helpers')
 
-
+import '@fortawesome/fontawesome-free/css/all.css'
 import Vue from 'vue';
 import VueRouter from "vue-router";
 import Vuetify from "vuetify/lib";
@@ -75,6 +75,10 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+let comCom = Vue.component('CommentComponent', {
+    template: `#CommentComponent`,
+})
+
 window.unlock = function(tag){
     axios
         .get(`/api/unlock/${tag}`)
@@ -100,6 +104,9 @@ window.unlock = function(tag){
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify({
+        icons: {
+            iconfont: 'fa',
+        },
         theme: {
             dark: true,
             themes: {

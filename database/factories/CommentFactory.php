@@ -14,10 +14,10 @@ class CommentFactory extends Factory
      */
     protected $model = Comment::class;
 
-    protected $commentable_type_options = [
+    public $commentable_type_options = [
         'App\Models\Post',
         //'App\Models\Comment',
-        'App\Models\User',
+        'App\Models\Project',
     ];
 
     /**
@@ -31,11 +31,14 @@ class CommentFactory extends Factory
         $type = $this->commentable_type_options[$i];
         $ids = array_column($type::all()->toArray(), (new $type())->getKeyName());
         $id = $ids[$this->faker->numberBetween(1, count($ids))-1];
+        if(Comment::count() > 35 && !in_array('App\Models\Comment', $this->commentable_type_options)){
+            $this->commentable_type_options = ['App\Models\Comment'];
+        }
         return [
             'user_id' => $this->faker->numberBetween(1,4),
             'commentable_type' => $type,
             'commentable_id' => $id,
-            'body' => [$this->faker->bs,$this->faker->bs,$this->faker->bs,$this->faker->bs,],
+            'body' => $this->faker->bs
         ];
     }
 }

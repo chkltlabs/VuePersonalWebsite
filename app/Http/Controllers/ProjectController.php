@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function index(Request $request){
-        $projects = Project::all();
+        $projects = Project::with(['comments'])->get();
         return response()->json(['portfolio' => $projects]);
     }
 }

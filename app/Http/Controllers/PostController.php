@@ -8,12 +8,16 @@ use App\Http\Controllers\MyController as Controller;
 
 class PostController extends Controller {
     public function index(Request $request) {
-        $posts = Post::with('comments')->get();
+        $posts = Post::with([
+                                'comments',
+                            ])->get();
         return response()->json(['posts' => $posts]);
     }
 
     public function view(Request $request, $id) {
-        $post = Post::with('comments')->find($id);
+        $post = Post::with([
+                               'comments',
+                           ])->find($id);
         return response()->json(['post' => $post]);
     }
 
@@ -31,10 +35,10 @@ class PostController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        $original           = Post::find($id);
-        $data               = $request->all();
-        if(isset($data['tags'])){
-            $data['tags'] = (array) json_decode($data['tags']);
+        $original = Post::find($id);
+        $data     = $request->all();
+        if (isset($data['tags'])) {
+            $data['tags'] = (array)json_decode($data['tags']);
         }
         $original->update($data);
         $original->save();

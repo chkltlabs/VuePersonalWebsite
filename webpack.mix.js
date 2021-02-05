@@ -3,6 +3,13 @@ const webpack = require('webpack');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 require('vuetifyjs-mix-extension')
 
+mix.options({
+    hmrOptions: {
+        host: 'localhost',
+        port: '8080',
+    }
+})
+
 mix.webpackConfig(webpack => {
     return {
         plugins: [

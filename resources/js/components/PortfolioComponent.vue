@@ -22,6 +22,18 @@
                         <v-img :src="item.image" rounded="50"></v-img>
                     </v-list-item-avatar>
                 </v-list-item>
+                <v-card-actions>
+                    <v-btn small @click="showComments = !showComments">
+                        <span v-if="!showComments">Show Comments</span>
+                        <span v-else>Hide Comments</span>
+                        <v-icon right>{{ !showComments ? 'fa-dumpster' : 'fa-dumpster-fire' }}</v-icon>
+                    </v-btn>
+                </v-card-actions>
+                <CommentSection
+                    :comments="item.comments"
+                    :show-comments="showComments"
+                    :post-index="index"
+                ></CommentSection>
             </v-card>
             <br>
         </div>
@@ -30,9 +42,10 @@
 <script>
 
 import ParagraphComponent from "./ParagraphComponent";
+import CommentSection from "./CommentSection";
 
 export default {
-    components: {ParagraphComponent},
+    components: {CommentSection, ParagraphComponent},
     props: {
         item: {
             type: Object
@@ -41,8 +54,12 @@ export default {
             type: Number
         }
     },
+    data() {
+        return {
+            showComments: false,
+        }
+    },
     mounted() {
-        console.log(this.item)
     }
 }
 

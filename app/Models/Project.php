@@ -20,7 +20,7 @@ class Project extends Model
     }
 
     public function comments(){
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable')->with(['subComments', 'user']);
     }
 
     public function images(){

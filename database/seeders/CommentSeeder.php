@@ -15,6 +15,22 @@ class CommentSeeder extends Seeder
     public function run()
     {
         Comment::truncate();
-        Comment::factory()->times(40)->create();
+        $factory = Comment::factory();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+        $factory->times(40)->create();
+
+        Comment::create([
+            'user_id' => 1,
+            'commentable_id' => 0,
+            'commentable_type' => \App\Models\Post::class,
+            'body' => "Slob on the knob",
+                        ]);
+
     }
 }

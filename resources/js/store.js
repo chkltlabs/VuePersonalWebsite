@@ -14,7 +14,7 @@ export default new Vuex.Store({
         contactInfo: [],
         portfolio: [],
         fadeThreshold: .75,
-        allowedTags: ['et'],
+        allowedTags: ['et', 'minus'],
         allTags: [],
     },
     mutations: {
