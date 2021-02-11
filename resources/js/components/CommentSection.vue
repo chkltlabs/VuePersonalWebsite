@@ -1,9 +1,12 @@
 <template>
     <v-expand-transition mode="out-in">
         <div :id="'comment-section-' + postIndex" v-if="showComments">
-            <v-btn x-small><span>Add Comment</span><v-icon right>fa-comment-dots</v-icon></v-btn>
-            <v-container v-if="isEditing && this.$store.state.getters.isLoggedIn()">
-
+            <v-container v-if=" this.$store.getters.isLoggedIn">
+            <comment-box
+            label="fuk"
+            placeholder="ur fase"
+            button-text="kiss me"
+            ></comment-box>
             </v-container>
             <v-container>
                 <CommentComponent
@@ -20,8 +23,9 @@
 </template>
 <script>
 import CommentComponent from "./CommentComponent";
+import CommentBox from "./CommentBox";
 export default {
-    components: { CommentComponent },
+    components: { CommentBox, CommentComponent },
     props: {
         showComments: {
             type: Boolean,

@@ -15,11 +15,20 @@
                 </v-card-title>
                 <v-card-text>{{ comment.body}}</v-card-text>
                 <v-card-actions>
-
+                    <v-btn x-small
+                        onclick="showReply = !showReply"
+                    >
+                        <v-icon x-small>fa-pen-nib</v-icon>
+                        <span>reply...</span>
+                    </v-btn>
                 </v-card-actions>
+                <comment-box
+                    :label="'replying to ' + comment.name"
+                    button-text="Send"
+                ></comment-box>
             </v-card>
                 <v-row v-if="comment.sub_comments && comment.sub_comments.length">
-                    <v-col :class="'offset-md-' + (depth)">
+                    <v-col :class="'offset-md-1'">
                         <comment-component
                             v-for="(subcomment, subindex) in comment.sub_comments"
                             :comment="subcomment"
@@ -35,10 +44,11 @@
 </template>
 <script>
 import CommentComponent from "./CommentComponent";
+import CommentBox from "./CommentBox";
 
 export default {
      name: "comment-component",
-    components: { CommentComponent },
+    components: {CommentBox, CommentComponent },
     props: {
         comment: {
             type: Object
@@ -64,6 +74,7 @@ export default {
                 '#eb7532',
                 '#e6261f',
             ],
+            showReply: false,
         }
     },
     computed: {
